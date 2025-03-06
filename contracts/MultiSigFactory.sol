@@ -5,7 +5,7 @@ import "./MultiSigWallet.sol"; // Ensure this file exists at the specified path
 
 contract MultiSigFactory {
     // --------------- STORAGE ----------------
-    uint256 id; // 256 bit to store the id of the wallet
+    uint256 id; // 256 bit to store the id of the wallet, can use uuid but more expensive
     mapping(uint256 => address) public multiSigWalletInstances; // Hash function to mapping the id to the wallet address
     mapping(address => mapping(address => bool)) public ownerWallets; // check if the owner has the wallet
 

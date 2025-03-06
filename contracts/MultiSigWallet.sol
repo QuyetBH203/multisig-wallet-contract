@@ -15,6 +15,8 @@ contract MultiSigWallet {
         Success,
         Fail
     }
+
+    // use IdType to check whether it is transactionID or consensusID
     enum IdType {
         Transaction,
         Consensus
@@ -37,7 +39,7 @@ contract MultiSigWallet {
         uint256 amount; // amount
     }
     mapping(uint256 => Transaction) public transactions; // id => trans
-    uint256 public transAmount; // check whether any transactionID are currently unresolve
+    uint256 public transAmount; // check amount token is locked in transaction
     /* 
         If there is any transactionID still unresolved, wallet won't let user creat a new consensusID
         Because it can change consensus rule of pending transaction
@@ -288,6 +290,7 @@ contract MultiSigWallet {
         uint256 _id,
         bool _vote
     ) external onlyOwner isIdExist(_id) notVoted(_id) notExecuted(_id) {
+        //set sender already voted
         voted[_id][msg.sender] = true;
         emit Voted(_id, msg.sender, _vote);
 
@@ -306,6 +309,7 @@ contract MultiSigWallet {
     }
 
     // helper: handle create
+    // use in createTrans and createCons
     function createId(IdType _idType) private {
         voted[id][msg.sender] = true;
         idsInfo[id] = IdInfo({
