@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 import "hardhat/console.sol";
-import "./MultiSigWallet.sol"; // Ensure this file exists at the specified path
+import "./MultiSigWallet.sol";
 
 contract MultiSigFactory {
     // --------------- STORAGE ----------------
